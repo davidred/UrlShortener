@@ -1,0 +1,19 @@
+<h1>URL Shortener</h1>
+
+<form role="form" id="form_id" action="<%= urls_url %>" method="post">
+  <%= form_auth %>
+  <div class="form-group">
+    <label for="long-url">Input Url</label>
+    <input type="url" name="url[long_url]" placeholder="http://www.example.com">
+  </div>
+  <button type="submit" class="btn btn-primary">Shorten</button>
+</form>
+
+<% if @url %>
+  <h2><%= link_to @url.short_url, @url.long_url, :target => '_blank' %></h2>
+<% end %>
+<ul>
+  <% @urls.each do |url| %>
+  <li><%= url.long_url %></li>
+  <% end %>
+</ul>
