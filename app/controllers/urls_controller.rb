@@ -34,17 +34,12 @@ class UrlsController < ApplicationController
       flash[:errors] = ["Invalid Short URL"]
       render :index
     end
-
   end
 
   def redirect
-    short_url = params[:short_url]
-    url = Url.find_by_short_url(short_url)
-    url.num_visits += 1
-    url.save
-    long_url = url.long_url
-    @urls
-    redirect_to long_url
+    @url = Url.find_by_short_url(params[:short_url])
+    @urls = Url.order(num_visits: :desc).limit(100)
+    render :index
   end
 
   def destroy
