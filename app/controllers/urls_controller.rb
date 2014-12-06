@@ -29,6 +29,7 @@ class UrlsController < ApplicationController
       @url.num_visits += 1
       @url.save
       @urls = Url.order(num_visits: :desc).limit(100)
+      # render json: @url
       render :index
     else
       @urls = Url.order(num_visits: :desc).limit(100)
@@ -37,10 +38,9 @@ class UrlsController < ApplicationController
     end
   end
 
-  def redirect
-    @url = Url.find_by_short_url(params[:short_url])
-    @urls = Url.order(num_visits: :desc).limit(100)
-    render :index
+  def get_short
+    @url = Url.find_by_short_url(url_params[:short_url])
+    render json: @url
   end
 
   def destroy

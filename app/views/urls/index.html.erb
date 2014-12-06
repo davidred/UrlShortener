@@ -19,7 +19,7 @@
     <label for="long-url">Short Url</label>
     <input id="short-url" type="text" name="url[short_url]" value="<%= @url.short_url if @url %>" placeholder="<%= SecureRandom.urlsafe_base64(8) %>">
   </div>
-  <button type="submit" class="btn btn-primary">Go</button>
+  <button id="go-button" type="submit" class="btn btn-primary">Go</button>
 </form>
 
 <ul class="top-urls">
@@ -42,4 +42,28 @@
     $('#short-url').attr('value', shortUrl);
 
   });
+
+  $('#go-button').on("click", function(event) {
+    var shortUrl = $('#short-url').attr('value');
+    $.ajax({
+      type: 'post',
+      url: '/urls/get_short',
+      data: {
+        'url': {
+          'short_url': shortUrl
+        }
+      },
+      success: function(data) {
+        var win = window.open(data['long_url'], '_blank');
+        if(win){
+          //Browser has allowed it to be opened
+          win.focus();
+        }else{
+          //Broswer has blocked it
+          alert('Please allow popups for this site');
+        }
+      },
+    });
+
+  })
 </script>
