@@ -2,6 +2,7 @@ class UrlsController < ApplicationController
 
   def index
     @urls = Url.order(num_visits: :desc).limit(100)
+    @url
   end
 
   def create
