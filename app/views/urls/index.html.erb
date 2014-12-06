@@ -1,28 +1,37 @@
 <h1>URL Shortener</h1>
 
-<form role="form" id="form_id" action="<%= urls_url %>" method="post">
+<form class="form-inline" role="form" id="form_id" action="<%= urls_url %>" method="post">
   <%= form_auth %>
   <div class="form-group">
     <label for="long-url">Input Url</label>
-    <input id="long-url" type="url" name="url[long_url]" value="<%= @url.long_url if @url %>" placeholder="http://www.example.com">
+    <input id="long-url" class="form-control" type="url" name="url[long_url]" value="<%= @url.long_url if @url %>" placeholder="http://www.example.com">
+    <button type="submit" class="btn btn-primary">Shorten</button>
   </div>
-  <button type="submit" class="btn btn-primary">Shorten</button>
 </form>
+<br>
+<br>
+<!-- <% if @url %>
+  <h2><%#= @url.short_url %></h2>
+<% end %> -->
 
-<% if @url %>
-  <h2><%= @url.short_url %></h2>
-<% end %>
-
-<form role="form" id="form_id" action="<%= redirect_to_url %>" method="post">
+<form class="form-inline" role="form" id="form_id" action="<%= redirect_to_url %>" method="post">
   <%= form_auth %>
   <div class="form-group">
     <label for="long-url">Short Url</label>
-    <input id="short-url" type="text" name="url[short_url]" value="<%= @url.short_url if @url %>" placeholder="<%= SecureRandom.urlsafe_base64(8) %>">
+    <input id="short-url"
+           class="form-control"
+           type="text"
+           name="url[short_url]"
+           value="<%= @url.short_url if @url %>"
+           placeholder="<%= SecureRandom.urlsafe_base64(8) %>">
+    <button id="go-button" type="submit" class="btn btn-primary">Go</button>
   </div>
-  <button id="go-button" type="submit" class="btn btn-primary">Go</button>
+
 </form>
 
-<ul class="top-urls">
+
+<h1>Top 100 Visited URLs</h1>
+<ul class="list-unstyled top-urls">
   <% @urls.each do |url| %>
   <li>
     <a href="" data-short-url="<%= url.short_url %>" data-long-url="<%= url.long_url %>" target="_blank">
