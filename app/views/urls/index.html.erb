@@ -4,17 +4,31 @@
   <%= form_auth %>
   <div class="form-group">
     <label for="long-url">Input Url</label>
-    <input type="url" name="url[long_url]" placeholder="http://www.example.com">
+    <input type="url" name="url[long_url]" value=<%= @url.long_url %> placeholder="http://www.example.com">
   </div>
   <button type="submit" class="btn btn-primary">Shorten</button>
 </form>
 
 <% if @url %>
-  <h2><%= link_to @url.short_url, redirect_url(@url.short_url) %></h2>
+  <h2><%= @url.short_url %></h2>
 <% end %>
+
+<form role="form" id="form_id" action="<%= redirect_to_url %>" method="post">
+  <%= form_auth %>
+  <div class="form-group">
+    <label for="long-url">Short Url</label>
+    <input type="text" name="url[short_url]" value=<%= @url.short_url %> placeholder="<%= SecureRandom.urlsafe_base64(8) %>">
+  </div>
+  <button type="submit" class="btn btn-primary">Go</button>
+</form>
 
 <ul>
   <% @urls.each do |url| %>
-  <li><%= url.long_url %> visits: <%= url.num_visits %></li>
+  <li>
+    <a href="<%= redirect_url(url.short_url) %>" target="_blank">
+    <%= url.short_url %>
+    </a>
+    <span> visits: <%= url.num_visits %> </span>
+  </li>
   <% end %>
 </ul>
