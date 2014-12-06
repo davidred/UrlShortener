@@ -15,6 +15,6 @@
 
 <ul>
   <% @urls.each do |url| %>
-  <li><%= url.long_url %></li>
+  <li><%= url.long_url %> visits: <%= url.num_visits %></li>
   <% end %>
 </ul>
