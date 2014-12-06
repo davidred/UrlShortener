@@ -10,8 +10,9 @@
 </form>
 
 <% if @url %>
-  <h2><%= link_to @url.short_url, @url.long_url, :target => '_blank' %></h2>
+  <h2><%= link_to @url.short_url, redirect_url(@url.short_url) %></h2>
 <% end %>
+
 <ul>
   <% @urls.each do |url| %>
   <li><%= url.long_url %></li>
