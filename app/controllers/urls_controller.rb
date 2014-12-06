@@ -1,11 +1,11 @@
 class UrlsController < ApplicationController
 
   def index
-    @urls = Url.all
+    @urls = Url.order(num_visits: :desc).limit(100)
   end
 
   def create
-    @urls = Url.all
+    @urls = Url.order(num_visits: :desc).limit(100)
     @url = Url.find_by_long_url(url_params['long_url'])
     if @url
       render :index
