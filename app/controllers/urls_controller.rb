@@ -23,8 +23,12 @@ class UrlsController < ApplicationController
   end
 
   def redirect
-    url = params[:short_url]
-    redirect_to url
+    short_url = params[:short_url]
+    url = Url.find_by_short_url(short_url)
+    url.num_visits += 1
+    url.save
+    long_url = url.long_url
+    redirect_to long_url
   end
 
   def destroy
