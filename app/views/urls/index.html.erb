@@ -1,5 +1,5 @@
 <h1>URL Shortener</h1>
-
+<br>
 <form class="form-inline" role="form" id="form_id" action="<%= urls_url %>" method="post">
   <%= form_auth %>
   <div class="form-group">
@@ -9,10 +9,7 @@
   </div>
 </form>
 <br>
-<br>
-<!-- <% if @url %>
-  <h2><%#= @url.short_url %></h2>
-<% end %> -->
+
 
 <form class="form-inline" role="form" id="form_id" action="<%= redirect_to_url %>" method="post">
   <%= form_auth %>
@@ -28,9 +25,10 @@
   </div>
 
 </form>
-
+<br>
 
 <h1>Top 100 Visited URLs</h1>
+<br>
 <ul class="list-unstyled top-urls">
   <% @urls.each do |url| %>
   <li>
