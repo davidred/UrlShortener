@@ -12,4 +12,4 @@ Ruby on Rails app to create shortened-urls.
 - Rails v 4.1.4
 - Ruby v 2.1.2
 - mongodb v 2.6.5 (brew install mongodb)
-- bundle install and run!
+- bundle install, run mongod, then rails s, and enjoy
