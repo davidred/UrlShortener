@@ -23,21 +23,6 @@ class UrlsController < ApplicationController
     end
   end
 
-  def redirect_button
-    @url = Url.find_by_short_url(url_params[:short_url])
-    if @url
-      @url.num_visits += 1
-      @url.save
-      @urls = Url.order(num_visits: :desc).limit(100)
-      # render json: @url
-      render :index
-    else
-      @urls = Url.order(num_visits: :desc).limit(100)
-      flash[:errors] = ["Invalid Short URL"]
-      render :index
-    end
-  end
-
   def redirect
     @url = Url.find_by_short_url(params[:short_url])
     if @url
@@ -52,11 +37,6 @@ class UrlsController < ApplicationController
       render :index
     end
 
-  end
-
-  def get_short
-    @url = Url.find_by_short_url(url_params[:short_url])
-    render json: @url
   end
 
   def destroy

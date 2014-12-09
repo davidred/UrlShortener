@@ -8,14 +8,12 @@
     <button type="submit" class="btn btn-primary">Shorten</button>
   </div>
 </form>
-<br>
 
 <% if @url %>
 <h1><a href="/<%= @url.short_url %>" class="top-urls" target="_blank"><%= @url.short_url %></a></h1>
 <% end %>
 
 <br>
-
 <h1>Top 100 Visited URLs</h1>
 <br>
 <ul class="list-unstyled top-urls">
@@ -35,26 +33,4 @@
       location = ''
     },1500);
   });
-
-  // $('#go-button').on("click", function(event) {
-  //   var shortUrl = $('#short-url').attr('value');
-  //   $.ajax({
-  //     type: 'post',
-  //     url: '/urls/get_short',
-  //     data: {
-  //       'url': {
-  //         'short_url': shortUrl
-  //       }
-  //     },
-  //     success: function(data) {
-  //       var win = window.open(data['long_url'], '_blank');
-  //       if(win){
-  //         win.focus();
-  //       }else{
-  //         //Browser has blocked it
-  //         alert('Please allow popups for this site');
-  //       }
-  //     },
-  //   });
-
 </script>
